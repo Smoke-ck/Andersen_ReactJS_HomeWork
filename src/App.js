@@ -1,38 +1,32 @@
 import './App.css';
-import { Component } from 'react';
+import { useState } from 'react';
 import Form from './component/Form/Form';
 import Sample from './component/Sample/Sample';
 
-class App extends Component {
-  state = {
-    stateFromForm: null,
-    showForm: true,
-  }
+function App() {
 
-  callbackStateFromForm = (dataFromForm) => {
-    this.setState({
+  const [state, setState] = useState({ stateFromForm: null, showForm: true, })
+
+  const callbackStateFromForm = (dataFromForm) => {
+    setState({
+      ...state,
       stateFromForm: dataFromForm,
-    })
+      showForm: false,
+    });
   }
 
-  hideForm = () => {
-    this.setState({ showForm: false });
-  }
-
-  render() {
-    if (!this.state.showForm) {
-      return <div className="sampleContentWrapper">
-        <Sample state={this.state} />
-        <button className="toFormButton" onClick={() => this.setState({ showForm: true })}>Back to form</button>
-      </div>
-    }
-    return <div className="content">
-      <Form
-        hideForm={this.hideForm}
-        callbackStateFromForm={this.callbackStateFromForm}
-      />
+  if (!state.showForm) {
+    return <div className="sampleContentWrapper">
+      <Sample state={state.stateFromForm} />
+      <button className="toFormButton" onClick={() => setState({ showForm: true })}>Back to form</button>
     </div>
   }
+  return <div className="content">
+    <Form
+
+      callbackStateFromForm={callbackStateFromForm}
+    />
+  </div>
 }
 
 export default App;

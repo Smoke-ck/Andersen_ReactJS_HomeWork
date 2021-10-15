@@ -1,40 +1,36 @@
 import './Form.css';
-import React, { Component } from 'react'
 import CustomInput from './CustomInput/CustomInput';
 import CustomTextarea from './CustomTextarea/CustomTextarea';
+import { useState } from 'react'
 
-export default class Form extends Component {
+function Form({ callbackStateFromForm }) {
 
-    state = {
-        newPersonData:
-        {
-            name: '',
-            surname: '',
-            phone: '',
-            date: '',
-            web: '',
-            about: '',
-            stack: '',
-            project: '',
-        },
+    const [newForm, setnewForm] = useState({
+        name: '',
+        surname: '',
+        phone: '',
+        date: '',
+        web: '',
+        about: '',
+        stack: '',
+        project: '',
         errors: {},
-    };
+    });
 
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        if (this.validateForm()) {
-            this.props.callbackStateFromForm(this.state.newPersonData)
-            this.resetForm();
-            this.props.hideForm();
+        if (validateForm()) {
+            callbackStateFromForm(newForm);
+            resetForm();
         }
-
     };
-
-    validateForm() {
-        let Data = this.state.newPersonData;
+    
+    function validateForm() {
+        let data = newForm;
         let errors = {};
         let formIsValid = true;
-        let { name, surname, phone, date, web, about, stack, project } = Data 
+        let { name, surname, phone, date, web, about, stack, project } = {...data};
+
         name = name.trim();
         if (!name) {
             formIsValid = false;
@@ -96,104 +92,96 @@ export default class Form extends Component {
             formIsValid = false;
             errors.project = "Поле пустое"
         } else if (project.length > 600) { formIsValid = false; }
-        this.setState({
-            errors: errors
+        
+        setnewForm({
+            ...newForm,
+            errors: errors,
         });
         return formIsValid;
     }
 
-    onChange = (e) => {
-        this.setState({
-            newPersonData: {
-                ...this.state.newPersonData,
-                [e.target.name]: e.target.value
-            }
+    const onChange = (e) => {
+        setnewForm({
+            ...newForm,
+            [e.target.name]: e.target.value
         });
     }
 
-    resetForm = () => {
-        this.setState({
-            newPersonData: {
-                name: '',
-                surname: '',
-                phone: '',
-                date: '',
-                web: '',
-                about: '',
-                stack: '',
-                project: '',
-            },
-            errors: '',
+    const resetForm = () => {
+        setnewForm({
+            name: '',
+            surname: '',
+            phone: '',
+            date: '',
+            web: '',
+            about: '',
+            stack: '',
+            project: '',
+            errors: {},
         });
     }
-
-    render() {
-        return (<>
-
-            <form className="container" onSubmit={this.handleSubmit}>
-                <p className="formTittle">Создание анкеты</p>
-                <CustomInput
-                    type="text"
-                    name='name'
-                    onChange={this.onChange}
-                    state={this.state}
-                    label="Имя:"
-                />
-                <CustomInput
-                    type="text"
-                    name='surname'
-                    onChange={this.onChange}
-                    state={this.state}
-                    label="Фамилия:"
-                />
-                <CustomInput
-                    type='tel'
-                    name='phone'
-                    onChange={this.onChange}
-                    state={this.state}
-                    label="Телефон:"
-                />
-                <CustomInput
-                    type="date"
-                    name='date'
-                    onChange={this.onChange}
-                    state={this.state}
-                    label="Дата рождения:"
-                />
-                <CustomInput
-                    type="text"
-                    name='web'
-                    onChange={this.onChange}
-                    state={this.state}
-                    label="Веб сайт:"
-                />
-                <CustomTextarea
-                    name='about'
-                    onChange={this.onChange}
-                    state={this.state}
-                    label="  О себе:"
-                />
-                <div className="errorMsg">{this.state.errors.aboutEmpty}</div>
-                <CustomTextarea
-                    name='stack'
-                    onChange={this.onChange}
-                    state={this.state}
-                    label='Стек технологий:'
-                />
-                <div className="errorMsg">{this.state.errors.stackEmpty}</div>
-                <CustomTextarea
-                    name='project'
-                    onChange={this.onChange}
-                    state={this.state}
-                    label="Описание последнего проекта:"
-                />
-                <div className="errorMsg">{this.state.errors.projectEmpty}</div>
-                <div className="formButton">
-                    <input className="button button--ok" type="submit" value="Сохранить" />
-                    <input className="button button--cancel" type="reset" value="Отмена" onClick={this.resetForm} />
-                </div>
-            </form>
-        </>
-        );
-    }
+    return (<>
+        <form className="container" onSubmit={handleSubmit}>
+            <p className="formTittle">Создание анкеты</p>
+            <CustomInput
+                type="text"
+                name='name'
+                onChange={onChange}
+                state={newForm}
+                label="Имя:"
+            />
+            <CustomInput
+                type="text"
+                name='surname'
+                onChange={onChange}
+                state={newForm}
+                label="Фамилия:"
+            />
+            <CustomInput
+                type='tel'
+                name='phone'
+                onChange={onChange}
+                state={newForm}
+                label="Телефон:"
+            />
+            <CustomInput
+                type="date"
+                name='date'
+                onChange={onChange}
+                state={newForm}
+                label="Дата рождения:"
+            />
+            <CustomInput
+                type="text"
+                name='web'
+                onChange={onChange}
+                state={newForm}
+                label="Веб сайт:"
+            />
+            <CustomTextarea
+                name='about'
+                onChange={onChange}
+                state={newForm}
+                label="О себе:"
+            />
+            <CustomTextarea
+                name='stack'
+                onChange={onChange}
+                state={newForm}
+                label='Стек технологий:'
+            />
+            <CustomTextarea
+                name='project'
+                onChange={onChange}
+                state={newForm}
+                label="Описание последнего проекта:"
+            />
+            <div className="formButton">
+                <input className="button button--ok" type="submit" value="Сохранить" />
+                <input className="button button--cancel" type="reset" value="Отмена" onClick={resetForm} />
+            </div>
+        </form>
+    </>
+    );
 }
+export default Form;

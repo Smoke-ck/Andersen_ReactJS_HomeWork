@@ -1,27 +1,26 @@
 import "./textarea.css"
-import React, { Component } from 'react'
 
-export default class CustomTextarea extends Component {
+function CustomTextarea({ name, onChange, state, label }) {
 
-    render() {
-        const { name, onChange, state, label} = this.props 
-        return <>
-            <label className="labelForTextarea">
-                {label}
-                <textarea
-                    className="textarea"
-                    type="text"
-                    value={state.newPersonData[name]}
-                    onChange={onChange}
-                    name={name}
-                />
-                <span
-                    className={'textareaInfo' + (state.newPersonData[name].length < 600 ? '' : 'active')}>
-                    {state.newPersonData[name].length < 600
-                        ? `${'Осталось символов:'} ${ 600 - state.newPersonData[name].length} `
-                        : 'Превышен лимит символов в поле'}
-                </span>
-            </label>
-        </>
-    }
+    return <>
+        <label className="labelForTextarea">
+            {label}
+            <textarea
+                className="textarea"
+                type="text"
+                value={state[name]}
+                onChange={onChange}
+                name={name}
+            />
+            <span
+                className={'textareaInfo' + (state[name].length < 600 ? '' : 'active')}>
+                {state[name].length < 600
+                    ? `${'Осталось символов:'} ${600 - state[name].length} `
+                    : 'Превышен лимит символов в поле'}
+            </span>
+            <div className="errorMsg">{state.errors[name]}</div>
+        </label>
+    </>
 }
+
+export default CustomTextarea;
