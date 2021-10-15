@@ -1,0 +1,22 @@
+.input {
+    display: block;
+    width: 400px;
+    height: calc(2.25rem + 2px);
+    padding: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    border: 1px solid #bdbdbd;
+    border-radius: 10px;
+    outline: none;
+    margin-top: 5px;
+}
+.input:hover {
+    box-shadow:0 0 5px rgba(0,0,0,1);
+}
+.inputLabel{
+    color:#ff5500;
+}

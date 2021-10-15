@@ -1,0 +1,45 @@
+.sample {
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+.sampleTittle {
+    text-align: center;
+    color: white;
+    background-image:url(../img/Background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    }
+.sampleHeader{
+    font-family:  sans-serif;
+    color:white;
+    font-weight: normal;
+    padding: 37px 23px;
+    text-shadow: 2px 2px 2px #090A00;
+}
+.sampleContact { 
+    background-color: #d3d7d8;
+}
+.sampleDescription {
+    background-color: #dde1e2;
+    padding: 0;
+}
+.sampleDescription>h4 {
+    margin-bottom: 15px;
+}
+.sampleContent {
+    padding: 10px 10px;
+    overflow-wrap: break-word;
+}
+.sampleDescriptionAbout {
+    margin-bottom: 20px;
+    background-color: #d3d7d8;
+    padding: 5px ;
+    font-family: "Nunito Sans";
+    line-height: 1.2;
+    letter-spacing: 0.3px;
+}
+.sampleContent.sampleDescription {
+    padding: 0;
+}

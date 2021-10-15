@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+.formTittle {
+    text-align: center;
+    font-size: 30px;
+}
+.errorMsg {
+    color: red;
+    margin-bottom: 10px;
+}
+.button {
+    vertical-align: top;
+    padding: 7px 20px;
+    font-family: inherit;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+    width: 150px;
+    outline: none;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #aaaaaa;
+}
+.formButton {
+    display: flex;
+    justify-content: space-between;
+}
+.button:hover {
+    box-shadow:0 0 4px black;
+}
+.button--ok {
+    margin-right: 10px;
+    color: green;
+}
+.button--cancel {
+    color:red;
+}
