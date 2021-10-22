@@ -20,7 +20,7 @@ function Navigation({ checkedRole, setModalActive, logOut }) {
                     </li >
                     {checkedRole
                         ? <li className="navigation__item">
-                            <NavLink to="/bascet" className="navigation__link" activeClassName="link--active"> BascetPage </NavLink>
+                            <NavLink to="/bascet" className="navigation__link" activeClassName="link--active"> Bascet </NavLink>
                         </li>
                         : ""}
                 </ul>
