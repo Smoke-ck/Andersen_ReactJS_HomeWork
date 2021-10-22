@@ -56,7 +56,7 @@ function DetailsProductPage({
                 <Edit callbackStateFromEdit={callbackStateFromEdit} onBackClick={onBackClick} />
                 <button
                     onClick={() => setState({ showForm: true })}
-                    className="userDetails__button button">Back to details page</button>
+                    className="details__button details__button--back button">Back to details page</button>
             </>
         )
     }
@@ -93,7 +93,7 @@ function DetailsProductPage({
                 </div>
             </div>
             <button onClick={onBackClick}
-                className="userDetails__button button">Назад</button>
+                className="details__button button">Назад</button>
         </div>
     )
 }

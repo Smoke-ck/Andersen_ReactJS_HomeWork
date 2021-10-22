@@ -76,7 +76,7 @@ function Edit({ callbackStateFromEdit, onBackClick }) {
     }
 
     return (<>
-        <form className="containerForm" onSubmit={handleSubmit}>
+        <form className="containerForm edit" onSubmit={handleSubmit}>
             <p className="formTittle">Login</p>
             <div className="formButton">
                 <input className="button button--ok" type="submit" value="Сохранить" />
@@ -102,7 +102,7 @@ function Edit({ callbackStateFromEdit, onBackClick }) {
                 name='description'
                 onChange={onChange}
                 state={newForm}
-                label="Описание последнего проекта:"
+                label="Описание товара:"
             />
             <div className="errorMsg">{newForm.errors.description}</div>
         </form>
