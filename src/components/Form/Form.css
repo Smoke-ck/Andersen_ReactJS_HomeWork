@@ -1,27 +1,31 @@
-.container {
+.containerForm {
     display: flex;
     flex-direction: column;
 }
 .formTittle {
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
 }
 .errorMsg {
     color: red;
     margin-bottom: 10px;
 }
 .button {
+    cursor: pointer;
     vertical-align: top;
     padding: 7px 20px;
     font-family: inherit;
-    font-size: 15px;
+    font-size: 12px;
     text-align: center;
     text-decoration: none;
-    width: 150px;
+    width: 100px;
     outline: none;
     border-radius: 10px;
     margin-bottom: 10px;
     border: 1px solid #aaaaaa;
+}
+.button:active {
+    background-color: white;
 }
 .formButton {
     display: flex;

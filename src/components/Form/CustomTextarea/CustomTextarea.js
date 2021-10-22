@@ -1,5 +1,5 @@
 import "./textarea.css"
-
+import React  from 'react';
 function CustomTextarea({ name, onChange, state, label }) {
 
     return <>
@@ -18,7 +18,6 @@ function CustomTextarea({ name, onChange, state, label }) {
                     ? `${'Осталось символов:'} ${600 - state[name].length} `
                     : 'Превышен лимит символов в поле'}
             </span>
-            <div className="errorMsg">{state.errors[name]}</div>
         </label>
     </>
 }

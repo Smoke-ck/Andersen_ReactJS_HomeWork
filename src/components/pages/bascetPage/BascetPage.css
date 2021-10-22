@@ -1,0 +1,31 @@
+.bascet {
+    padding: 20px 50px;
+}
+.bascet__titel {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.bascet__card {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.bascet__card--img {
+    width: 100px;
+    margin-right: 50px;
+}
+.bascet__card--description {
+    display: flex;
+    align-items: center;
+}
+.bascet__card--control {
+    display: flex;
+    align-items: center;
+}
+.bascet__card--control-clear {
+    margin-left: 20px;
+}
+.bascet__card--count {
+    margin:0 5px;
+
+}

@@ -1,0 +1,44 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    align-items: center;
+    border-radius: 10px;
+}
+.card:hover {
+    box-shadow:0 0 4px orangered;
+}
+.card__tittle {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    font-size: 20px;
+    color:orangered;
+}
+.card__tittle--notActive {
+    color:black;
+}
+.card__image {
+    width: 200px;
+}
+.card__button {
+    cursor: pointer;
+    vertical-align: top;
+    padding: 7px 10px;
+    font-family: inherit;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+    width: 150px;
+    outline: none;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #aaaaaa;
+}
+.card__button:hover {
+    box-shadow:0 0 4px black;
+}
+.card__button:active {
+    background-color: white;
+}

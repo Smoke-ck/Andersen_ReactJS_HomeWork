@@ -1,6 +1,6 @@
 import './Input.css'
-
-function CustomInput({ type, name, onChange, state, label }) {
+import React  from 'react';
+function CustomInput({ type, name, onChange, state, label,fore}) {
 
     return (
         <label className="inputLabel">
@@ -12,7 +12,6 @@ function CustomInput({ type, name, onChange, state, label }) {
                 name={name}
                 max="2021-12-31"
             />
-            <div className="errorMsg">{state.errors[name]}</div>
         </label>
     )
 
