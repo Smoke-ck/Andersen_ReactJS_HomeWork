@@ -3,4 +3,8 @@
 }
 .about__title {
     text-align: center;
+    color: white;
+}
+.about__description {
+    color: white;
 }

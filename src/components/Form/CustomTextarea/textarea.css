@@ -16,9 +16,10 @@
 }
 .labelForTextarea {  
     color: #ff5500;
+    font-size: 12px;
 }
 .textareaInfo {
-    color: black;
+    color: white;
     font-size: 14px;
 }
 .textareaInfoactive {

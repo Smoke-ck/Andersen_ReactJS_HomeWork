@@ -1,130 +1,75 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AppComponent from './components/AppComponent'
 import BascetPage from './components/pages/bascetPage/BascetPage';
-import useHomePageList from "./hooks/useHomePageList"
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navigation from './components/common/Navigation';
 import Modal from "./modal/Modal"
 import Form from './components/Form/Form';
 import './App.css'
 import About from './components/pages/about/About';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from './store/actions/shopProducts';
+import { fetchLogin } from './store/actions/loginUser';
 
 const App = () => {
 
-  const { itemsData, toggleTodoItem, remove, changeItem } = useHomePageList()
-  const [selectedItems, setSelectedItems] = useState([]);
+  const dispatch = useDispatch();
+  const ADMIN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
+  useEffect(() => {
+    dispatch(fetchProducts());
+
+  }, []);
+  const token = useSelector(store => store.login.token);
+
+
   const [modalActive, setModalActive] = useState(true);
   const [state, setState] = useState({ stateFromForm: '' });
 
   const callbackStateFromForm = (dataFromForm) => {
-    setState({
-      ...state,
+    setState(prevState => ({
+      ...prevState,
       stateFromForm: dataFromForm,
-
-    });
+    }));
   };
+
   const role = state.stateFromForm;
-  const checkedRole = (role === 'Admin' || role === "Customer");
-  
+  let isAdmin = (ADMIN === token);
+  const checkedRole = (ADMIN === token || role === "Customer");
+
   const logOut = () => {
-    setState({
-      ...state,
+    dispatch(fetchLogin({ name: "Admin", password: "Admin" }))
+    setState(prevState => ({
+      ...prevState,
       stateFromForm: { name: "" },
-    })
+    }))
   };
-
-  const allPrice = () => {
-    let price = 0;
-    selectedItems.map(el => {
-      return price = el.price * el.count + price;
-    });
-  };
-
-  const addItem = (data) => {
-    setSelectedItems(prevState => {
-      const state = prevState.map(el => {
-        const item = { ...el };
-        return item;
-      });
-      let condition = false;
-      state.map(el => {
-        if (el.name === data.name) {
-          condition = true;
-        }
-      });
-      if (condition) {
-        state.map(el => {
-          if (el.name === data.name) {
-            const item = { ...el };
-            el.count = el.count + data.count;
-            return item;
-          }
-        });
-      } else {
-        state.push(data);
-      }
-      return state;
-    });
-
-    allPrice();
-  };
-
-  const cardAction = (id, type) =>
-    setSelectedItems(prevState => {
-      const state = [...prevState];
-      state.map((el) => {
-        if (id === el.id && type === 'increment') {
-          el.count = el.count + 1;
-        }
-        if (id === el.id && type === 'decrement') {
-          el.count = el.count - 1;
-        }
-      });
-      return [...state];
-    });
-
-  const deleteItem = id =>
-    setSelectedItems(prevState => {
-      const state = prevState.filter((el, i) => {
-        return id !== el.id && el;
-      });
-      return [...state];
-    });
 
   return (
-
     <Router>
       <div className="menu">
-        <Navigation checkedRole={checkedRole} setModalActive={setModalActive} logOut={logOut} />
+        <Navigation
+          checkedRole={checkedRole}
+          setModalActive={setModalActive}
+          logOut={logOut} />
       </div>
       <div className="container">
         <Switch>
           <Route path="/home" >
             <AppComponent
-              data={itemsData}
-              addItem={addItem}
-              toggleTodoItem={toggleTodoItem}
               checkedRole={checkedRole}
-              changeItem={changeItem}
-              role={role}
-            />
+              isAdmin={isAdmin} />
           </Route>
           <Route path="/about">
             <About />
           </Route>
           <Route path="/bascet">
-            <BascetPage
-              count={selectedItems.length}
-              selectedItems={selectedItems}
-              setPrice={allPrice}
-              deleteItem={deleteItem}
-              cardAction={cardAction}
-              remove={remove}
-            />
+            <BascetPage />
           </Route>
         </Switch>
       </div>
-      <Modal active={modalActive} setActive={setModalActive}>
+      <Modal
+        active={modalActive}
+        setActive={setModalActive}>
         {<Form
           setActive={setModalActive}
           callbackStateFromForm={callbackStateFromForm}

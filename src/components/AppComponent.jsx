@@ -1,35 +1,29 @@
 import CardPage from './pages/cardPage/CardPage';
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { useSelector } from "react-redux"
 import DetailsProductPage from './pages/detailsPage/DetailsProductPage';
 import "./AppComponent.css"
 
-const AppComponent = ({ data, addItem, toggleTodoItem, checkedRole, changeItem, role }) => {
+const AppComponent = ({ checkedRole, isAdmin }) => {
 
+  const products = useSelector(store => store.products.products);
   const { path } = useRouteMatch();
 
   return (
     <Switch>
       <Route path={`${path}`} exact>
         <div className="cards">
-          {data.map((el) => (
+          {products.map((el) => (
             <CardPage
               key={el.id}
-              addItem={addItem}
-              toggleTodoItem={toggleTodoItem}
               id={el.id}
               el={el}
-              checkedRole={checkedRole}
-            />
-          ))}
+              checkedRole={checkedRole} />))}
         </div>
       </Route>
       <Route path={`${path}/:id`}>
         <DetailsProductPage
-          addItem={addItem}
-          toggleTodoItem={toggleTodoItem}
-          changeItem={changeItem}
-          role={role}
-        />
+          isAdmin={isAdmin} />
       </Route>
     </Switch>
   );

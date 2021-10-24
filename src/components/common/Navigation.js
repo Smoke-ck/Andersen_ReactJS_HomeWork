@@ -26,7 +26,7 @@ function Navigation({ checkedRole, setModalActive, logOut }) {
                 </ul>
             </div>
             <div>
-                <button className="card__button" onClick={!checkedRole
+                <button className="card__button navigation__login" onClick={!checkedRole
                     ? () => { setModalActive(true) }
                     : onBackLogin}>
                     {!checkedRole ? 'Login' : 'LogOut'}</button>

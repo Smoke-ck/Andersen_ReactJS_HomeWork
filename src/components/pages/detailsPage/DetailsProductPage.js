@@ -1,44 +1,53 @@
 import React from 'react'
 import { withRouter } from 'react-router';
-import { useState } from 'react';
-import useDetailsProductPage from "../../../hooks/useDetailsProductPage"
+import { useState, useEffect } from 'react';
 import "./DetailsProductPage.css"
 import Edit from '../editPage/Edit';
 
-function DetailsProductPage({
+import { fetchProduct, updateFetchProduct } from "../../../store/actions/shopProducts"
+import { fetchNewCart, fetchUpdateCart } from '../../../store/actions/cardProducts';
+import { useDispatch, useSelector } from 'react-redux';
 
-    addItem,
-    toggleTodoItem,
-    changeItem,
-    role,
+function DetailsProductPage({
+    isAdmin,
     history,
     match: {
         params: { id }
     }
 }) {
 
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchProduct(id));
+    }, [])
+
+    const product = useSelector(store => store.product.product)
+
+    const { image, title, description, price, rating } = product;
+    const { count } = { ...rating };
+
     const [items, setItems] = useState(1)
-    const [state, setState] = useState({ stateFromForm: null, showForm: true, })
+    const [dataEdit, setDataEdit] = useState({ id: id, stateFromForm: null, showForm: true, })
 
     const callbackStateFromEdit = (dataFromForm) => {
-        setState({
-            ...state,
+        dataFromForm.id = id;
+        setDataEdit(prevState => ({
+            ...prevState,
             stateFromForm: dataFromForm,
             showForm: true,
-        });
-        changeItem(details.id, dataFromForm)
+        }));
+        dispatch(updateFetchProduct(dataFromForm));
     }
-
-    const { details } = useDetailsProductPage(id);
 
     function onBackClick() {
         history.goBack();
     }
 
-    function toggleClickHandler(details,) {
-        toggleTodoItem(details.id, items)
-        details.count = details.count * items;
-        addItem(details);
+    function toggleClickHandler(product) {
+        dispatch(fetchNewCart(product))
+        product.quantity = items;
+        dispatch(fetchUpdateCart(product))
         setItems(1);
     }
 
@@ -50,12 +59,12 @@ function DetailsProductPage({
         setItems(items + 1)
     }
 
-    if (!state.showForm && role === "Admin") {
+    if (!dataEdit.showForm && isAdmin) {
         return (
             <>
                 <Edit callbackStateFromEdit={callbackStateFromEdit} onBackClick={onBackClick} />
                 <button
-                    onClick={() => setState({ showForm: true })}
+                    onClick={() => setDataEdit({ showForm: true })}
                     className="details__button details__button--back button">Back to details page</button>
             </>
         )
@@ -63,39 +72,46 @@ function DetailsProductPage({
     return (
         <div className="details">
             <h2 className="details__title">Product details</h2>
-            {role === "Admin" ? <button
-                onClick={() => setState({ showForm: false })}
-                className="userDetails__button button">Edit</button> : ""}
+
+            {isAdmin
+                ? <button
+                    onClick={() => setDataEdit({ showForm: false })}
+                    className="userDetails__button button">Edit</button>
+                : ""}
+
             <div className="details__content">
-                <img src={details.image} alt={details.name} className="details--img" />
+                <img src={image} alt={title} className="details--img" />
                 <div className="details__description--product">
-                    <h3>Описание</h3>
-                    {details.description}
+                    <h3 className="details__description--product-title">Описание</h3>
+                    {description}
                 </div>
                 <div className="details__description">
-                    <p className="details__description--title">Название: {details.name || 'Anonymous'}</p>
+                    <p className="details__description--title">Название: {title || 'Anonymous'}</p>
                     <div className="details__description--control">
                         <button
                             disabled={items === 1 ? true : false}
-                            onClick={() => increment(details)} > - </button >
+                            onClick={() => increment()} > - </button >
                         <p className="details__description--count">{items}</p>
-                        <button onClick={() => decrement(details)}> + </button >
+                        <button onClick={() => decrement()}> + </button >
                     </div>
                     <button
                         className="button details__button"
-                        disabled={details.number === 0 ? true : false}
-                        onClick={() => { toggleClickHandler(details) }}>
-                        {details.number === 0
+                        disabled={count === 0 ? true : false}
+                        onClick={() => { toggleClickHandler(product) }}>
+                        {count === 0
                             ? "Нет в наличии"
                             : " Добавить в корзину"}
                     </button>
-                    <p>Количество в наличии {details.number}</p>
+                    <p>Цена: {price}</p>
+                    <p>Количество в наличии: {count}</p>
                 </div>
             </div>
-            <button onClick={onBackClick}
+            <button
+                onClick={onBackClick}
                 className="details__button button">Назад</button>
         </div>
     )
 }
 
 export default withRouter(DetailsProductPage)
+

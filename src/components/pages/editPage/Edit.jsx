@@ -6,16 +6,18 @@ import { useState } from 'react'
 function Edit({ callbackStateFromEdit, onBackClick }) {
 
     const [newForm, setnewForm] = useState({
-        name: '',
-        number: '',
+        title: '',
+        price: '',
         description: '',
         errors: {},
     });
 
+    const { title, price, description } = newForm;
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
-            callbackStateFromEdit(newForm);
+            callbackStateFromEdit({ title, price, description });
             onBackClick();
             resetForm();
         }
@@ -25,23 +27,23 @@ function Edit({ callbackStateFromEdit, onBackClick }) {
         let data = newForm;
         let errors = {};
         let formIsValid = true;
-        let { name, number, description } = { ...data };
+        let { title, price, description } = { ...data };
 
-        name = name.trim();
-        if (!name) {
+        title = title.trim();
+        if (!title) {
             formIsValid = false;
-            errors.name = "Поле пустое"
+            errors.title = "Поле пустое"
         }
-        number = number.trim()
-        if (!number) {
+        price = price.trim()
+        if (!price) {
             formIsValid = false;
-            errors.number = "Поле пустое"
-        } else if (number.length > 30) {
+            errors.price = "Поле пустое"
+        } else if (price.length > 30) {
             formIsValid = false;
-            errors.number = "Максимальное количество символов 30"
-        } else if (!(/[0-9]/).test(number)) {
+            errors.price = "Максимальное количество символов 30"
+        } else if (!(/[0-9]/).test(price)) {
             formIsValid = false;
-            errors.number = "Только числа"
+            errors.price = "Только числа"
         }
 
         description = description.trim();
@@ -50,63 +52,64 @@ function Edit({ callbackStateFromEdit, onBackClick }) {
             errors.description = "Поле пустое"
         } else if (description.length > 600) {
             formIsValid = false;
-            errors.number = "Максимальное количество символов 600"
+            errors.price = "Максимальное количество символов 600"
         }
-        setnewForm({
-            ...newForm,
+        setnewForm(prevState => ({
+            ...prevState,
             errors: errors,
-        });
+        }));
         return formIsValid;
     }
 
     const onChange = (e) => {
-        setnewForm({
-            ...newForm,
+        setnewForm(prevState => ({
+            ...prevState,
             [e.target.name]: e.target.value
-        });
+        }));
     }
 
     const resetForm = () => {
         setnewForm({
-            name: '',
-            number: '',
+            title: '',
+            price: '',
             description: '',
             errors: {},
         });
     }
 
-    return (<>
-        <form className="containerForm edit" onSubmit={handleSubmit}>
-            <p className="formTittle">Login</p>
-            <div className="formButton">
-                <input className="button button--ok" type="submit" value="Сохранить" />
-                <input className="button button--cancel" type="reset" value="Отмена" onClick={resetForm} />
-            </div>
-            <CustomInput
-                type="text"
-                name="name"
-                onChange={onChange}
-                state={newForm}
-                label="Название продукта:"
-            />
-            <div className="errorMsg">{newForm.errors.name}</div>
-            <CustomInput
-                type="text"
-                name='number'
-                onChange={onChange}
-                state={newForm}
-                label="Сколько в наличии"
-            />
-            <div className="errorMsg">{newForm.errors.number}</div>
-            <CustomTextarea
-                name='description'
-                onChange={onChange}
-                state={newForm}
-                label="Описание товара:"
-            />
-            <div className="errorMsg">{newForm.errors.description}</div>
-        </form>
-    </>
+    return (
+        <>
+            <form className="containerForm edit" onSubmit={handleSubmit}>
+                <p className="formTittle">Login</p>
+                <div className="formButton">
+                    <input className="button button--ok" type="submit" value="Сохранить" />
+                    <input className="button button--cancel" type="reset" value="Очистить" onClick={resetForm} />
+                </div>
+                <CustomInput
+                    type="text"
+                    name="title"
+                    onChange={onChange}
+                    state={newForm}
+                    label="Название продукта:"
+                />
+                <div className="errorMsg">{newForm.errors.title}</div>
+                <CustomInput
+                    type="text"
+                    name='price'
+                    onChange={onChange}
+                    state={newForm}
+                    label="Сколько в наличии"
+                />
+                <div className="errorMsg">{newForm.errors.price}</div>
+                <CustomTextarea
+                    name='description'
+                    onChange={onChange}
+                    state={newForm}
+                    label="Описание товара:"
+                />
+                <div className="errorMsg">{newForm.errors.description}</div>
+            </form>
+        </>
     );
 }
 

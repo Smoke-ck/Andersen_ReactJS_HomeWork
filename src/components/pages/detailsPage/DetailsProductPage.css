@@ -7,6 +7,14 @@
     align-items: center;
     justify-content: space-around;
     padding: 20px ;
+    color: white;
+}
+.details__description--product-title {
+    margin-bottom: 20px;
+}
+.details__title {
+    color: white;
+    padding-bottom: 20px ;
 }
 .details--img {
     width: 300px;

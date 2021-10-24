@@ -3,9 +3,8 @@
 }
 .container {
   margin: 0px auto;
-  background-color:#d4d4d4;
+  background-color:#5e5e5e;
   justify-content: center;
-  border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 0 5px 5px rgb(0 0 0 / 20%);
 }
@@ -15,10 +14,8 @@
   align-items: center;
   padding: 5px;
   height: 70px;
-  background-image: url('https://i.ebayimg.com/thumbs/images/g/ujsAAOSwpJRdoU03/s-l225.jpg');
+  background-image: url('https://thumbs.dreamstime.com/z/abstract-hi-tech-dark-metal-silver-background-d-render-illustration-74148296.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position:right;
 }
-
-/* https://hondajdm.ru/image/cache/catalog/47CE73EF-A18E-4BB1-A005-48C670690920-1140x380.jpeg */

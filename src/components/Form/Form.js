@@ -1,20 +1,27 @@
 import React from 'react';
 import './Form.css';
 import CustomInput from './CustomInput/CustomInput';
-
+import { fetchLogin } from '../../store/actions/loginUser';
 import { useState } from 'react'
+import { useDispatch } from "react-redux"
 
 function Form({ setActive, callbackStateFromForm }) {
 
+    const ADMIN_NAME = 'mor_2314';
+    const ADMIN_PASSWORD = '83r5^_';
+
+    const dispatch = useDispatch();
+
     const [newForm, setnewForm] = useState({
         name: '',
-        surname: '',
+        password: '',
         errors: {},
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
+            dispatch(fetchLogin(newForm))
             callbackStateFromForm(newForm.name);
             resetForm();
             setActive(false)
@@ -25,45 +32,49 @@ function Form({ setActive, callbackStateFromForm }) {
         let data = newForm;
         let errors = {};
         let formIsValid = true;
-        let { name, surname, } = { ...data };
+        let { name, password, } = { ...data }
 
         name = name.trim();
         if (!name) {
             formIsValid = false;
             errors.name = "Поле пустое"
-        } else if (!(/[A-Z-А-Я-Ё]/).test(name) || name[0] !== name[0].toUpperCase()) {
-            formIsValid = false;
-            errors.name = "Имя должно начинаться с большой буквы"
-        } else if ((name === "Admin" && surname === '123') || (name === "Customer" && surname === '456')) {
-            formIsValid = true
-        } else {
-            formIsValid = false
-            errors.name = "Логин или пароль не верны"
-            errors.surname = "Логин или пароль не верны"
+        } else if (name === ADMIN_NAME || name === "Customer") {
+            formIsValid = true;
         }
-        surname = surname.trim();
-        if (!surname) {
+        else if (name !== ADMIN_NAME || name !== "Customer") {
             formIsValid = false;
-            errors.surname = "Поле пустое"
+            errors.name = "Неверный ввод"
         }
-        setnewForm({
-            ...newForm,
+
+        password = password.trim();
+        if (!password) {
+            formIsValid = false;
+            errors.password = "Поле пустое"
+        } else if (password === ADMIN_PASSWORD || password === "456") {
+            formIsValid = true;
+        }
+        else if (password !== ADMIN_PASSWORD || password !== "456") {
+            formIsValid = false;
+            errors.password = "Неверный пароль"
+        }
+        setnewForm(prevState => ({
+            ...prevState,
             errors: errors,
-        });
+        }));
         return formIsValid;
     }
 
     const onChange = (e) => {
-        setnewForm({
-            ...newForm,
+        setnewForm(prevState => ({
+            ...prevState,
             [e.target.name]: e.target.value
-        });
+        }));
     }
 
     const resetForm = () => {
         setnewForm({
             name: '',
-            surname: '',
+            password: '',
             errors: '',
         });
     }
@@ -71,8 +82,8 @@ function Form({ setActive, callbackStateFromForm }) {
         <form className="containerForm" onSubmit={handleSubmit}>
             <p className="formTittle">Login</p>
             <div className="formButton">
-                <input className="button button--ok" type="submit" value="Сохранить" />
-                <input className="button button--cancel" type="reset" value="Отмена" onClick={resetForm} />
+                <input className="button button--ok button__login" type="submit" value="Сохранить" />
+                <input className="button button--cancel button__login" type="reset" value="Отмена" onClick={resetForm} />
             </div>
             <CustomInput
                 type="text"
@@ -84,12 +95,12 @@ function Form({ setActive, callbackStateFromForm }) {
             <div className="errorMsg">{newForm.errors.name}</div>
             <CustomInput
                 type="text"
-                name='surname'
+                name='password'
                 onChange={onChange}
                 state={newForm}
                 label="Pasword:"
             />
-            <div className="errorMsg">{newForm.errors.surname}</div>
+            <div className="errorMsg">{newForm.errors.password}</div>
         </form>
     </>
     );
