@@ -8,6 +8,7 @@
     padding: 30px;
     display: flex;
     justify-content: space-between;
+    border-radius: 10px;
     &__title {
         font-size: 25px;
         margin-bottom: 10px;
@@ -61,6 +62,7 @@
     padding: 30px;
     display: flex;
     justify-content: space-between;
+    border-radius: 10px;
 }
 .deleteMenu {
     display: flex;

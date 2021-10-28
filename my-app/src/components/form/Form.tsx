@@ -5,8 +5,7 @@ import { createTodo } from '../../store/actions/todos';
 import "./Form.scss";
 
 type ITodoForm = {
-    // createTodo: (title:string) => Promise <IToDos>
-    createTodo: any;
+    createTodo: (title:string) => Promise <IToDos>
 }
 
 const Form: FC<ITodoForm> = ({ createTodo }) => {

@@ -1,8 +1,8 @@
 export type IToDos = {
     title: string,
     completed: boolean,
-    id: string | number,
     favorite: boolean,
+    id: number,
 }
 
 const API_URL = 'http://localhost:3000/todos';
@@ -25,7 +25,7 @@ export const deleteTodoApi = async (id: number | string): Promise<IToDos> => {
     return responce.json()
 }
 
-export const createTodoApi = async (title: IToDos): Promise<IToDos> => {
+export const createTodoApi = async (title: string): Promise<IToDos> => {
     const responce = await fetch(
         API_URL, {
         method: 'POST',

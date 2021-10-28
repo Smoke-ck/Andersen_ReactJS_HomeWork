@@ -11,7 +11,7 @@ type IToDoList = {
     todos: Array<IToDos>,
     onItemToggle: (id: number | string) => Promise<IToDos>,
     onItemFavorite: (id: number | string) => Promise<IToDos>,
-    onItemDelete: (id: number | string) => Promise<IToDos>,
+    onItemDelete: (id: number | string) => void,
     onUpdate: (id: number | string, title: string) => Promise<IToDos>
 }
 

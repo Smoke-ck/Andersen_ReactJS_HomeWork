@@ -11,7 +11,7 @@
         color: #212529;
         background-color: #fff;
         border: 1px solid #bdbdbd;
-        border-radius: 10px;
+        border-radius: 5px;
         outline: none;
         margin-top: 5px;
         overflow-wrap: break-word;
@@ -20,7 +20,7 @@
         }
     }
     &__button {
-        background-color:var(--primaryButtonColor);
+        background-color:#767676;
         border: none;
         border-radius: 5px;
         color: white;
