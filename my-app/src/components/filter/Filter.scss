@@ -1,0 +1,25 @@
+.filter {
+    margin-bottom: 20px;
+    &__button {
+        margin-right: 5px;
+        background-color:#a1a1a1;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        padding: 10px 32px;
+        text-align: center;
+        font-size: 16px;
+        margin: 4px 2px;
+        opacity: 0.6;
+        transition: 0.3s;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+        &--active {
+            background-color:#767676;
+            opacity: 1;
+            color:gold;
+        }
+        &:hover{opacity: 1;}
+    }
+}

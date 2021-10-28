@@ -1,0 +1,18 @@
+:root {
+    --background-color-theme1: #dadada;
+    --background-color-theme2: #323232;
+    --background-color: var(--background-color-theme1);
+
+    --background--color-card-theme1: white;  
+    --background--color-card-theme2: #afafaf;
+    --background--color-card :var(--background--color-card-theme1);
+
+    --background-color-done-theme1: #cec778;
+    --background-color-done-theme2: #7e571f;
+    --background-color-done: var(--background-color-done-theme1);
+
+    --font-color-theme1: #63696a;
+    --font-color-theme2: #e1e1e1;
+    --font-color: var(--font-color-theme1);
+  }
+ 
