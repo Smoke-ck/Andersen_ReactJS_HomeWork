@@ -173,21 +173,21 @@ export default class Form extends Component {
                     state={this.state}
                     label="  О себе:"
                 />
-                <div className="errorMsg">{this.state.errors.aboutEmpty}</div>
+                <div className="errorMsg">{this.state.errors.about}</div>
                 <CustomTextarea
                     name='stack'
                     onChange={this.onChange}
                     state={this.state}
                     label='Стек технологий:'
                 />
-                <div className="errorMsg">{this.state.errors.stackEmpty}</div>
+                <div className="errorMsg">{this.state.errors.stack}</div>
                 <CustomTextarea
                     name='project'
                     onChange={this.onChange}
                     state={this.state}
                     label="Описание последнего проекта:"
                 />
-                <div className="errorMsg">{this.state.errors.projectEmpty}</div>
+                <div className="errorMsg">{this.state.errors.project}</div>
                 <div className="formButton">
                     <input className="button button--ok" type="submit" value="Сохранить" />
                     <input className="button button--cancel" type="reset" value="Отмена" onClick={this.resetForm} />
