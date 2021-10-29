@@ -9,6 +9,7 @@
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
+    &:hover {box-shadow:0 0 10px white;}
     &__title {
         font-size: 25px;
         margin-bottom: 10px;
@@ -63,6 +64,7 @@
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
+    &:hover {box-shadow:0 0 10px white;}
 }
 .deleteMenu {
     display: flex;
