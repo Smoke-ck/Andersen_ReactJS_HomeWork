@@ -1,16 +1,18 @@
-import React, { FC, MouseEventHandler } from "react";
+import React, { FC} from "react";
 import { IToDos } from "../../api";
 import { useState } from "react";
 import Modal from "./../modal/Modal";
 import { FaStar } from 'react-icons/fa'
 import './ListItem.scss'
+import PopUp from "./popUp/PopUp";
+import { Action} from "redux";
 
 type IToDoListItem = {
     item: IToDos,
-    onItemToggle: (id: number | string) => Promise<IToDos>,
+    onItemToggle: (id: number | string) => Promise<Action>,
     onItemDelete: (id: number | string) => void,
-    onItemFavorite: (id: number | string) => Promise<IToDos>,
-    onUpdate: (id: number | string, title: string) => Promise<IToDos>
+    onItemFavorite: (id: number | string) => Promise<Action>,
+    onUpdate: (id: number | string, title: string) => Promise<Action>
 }
 
 const ListItem: FC<IToDoListItem> = ({ item, onItemToggle, onItemDelete, onItemFavorite, onUpdate }) => {
@@ -103,26 +105,13 @@ const ListItem: FC<IToDoListItem> = ({ item, onItemToggle, onItemDelete, onItemF
                             </div>
                             <div className="listItem__menu">
                                 {detailsActive
-                                    ? <div>
-                                        <button
-                                            className="listItem__menu--button"
-                                            onClick={(e: React.MouseEvent) => handleFavoriteToDo(e)}>
-                                            {item.favorite ? 'Убрать из избранного ' : 'В избранно'}
-                                        </button>
-                                        <button
-                                            className="listItem__menu--button"
-                                            onClick={(e: React.MouseEvent) => handleDoneToDo(e)}>
-                                            {item.completed ? 'Вернуть в работу' : 'Выполнено'}
-                                        </button>
-                                        <button
-                                            className="listItem__menu--button"
-                                            onClick={handleClick}>Редактировать
-                                        </button>
-                                        <button
-                                            className="listItem__menu--button"
-                                            onClick={handleOpenChange}>Удалить
-                                        </button>
-                                    </div>
+                                    ? 
+                                    <PopUp 
+                                    handleFavoriteToDo={handleFavoriteToDo}
+                                    handleDoneToDo={handleDoneToDo}
+                                    handleClick={handleClick}
+                                    handleOpenChange={handleOpenChange}
+                                    item={item}/>
                                     : ''}
                             </div>
                         </div>
@@ -130,7 +119,6 @@ const ListItem: FC<IToDoListItem> = ({ item, onItemToggle, onItemDelete, onItemF
                             className={!item.favorite ? "listItem___button--favorite" : 'listItem__button--notFavorite'}
                             onClick={(e: React.MouseEvent) => handleTogleStar(e)}> <FaStar />
                         </div>
-
                         <Modal
                             active={modalActive}
                             setActive={setModalActive} >

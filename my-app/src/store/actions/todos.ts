@@ -1,7 +1,7 @@
 import { IAllToDos } from './../reducers/todos';
 import { IToDos } from './../../api';
 import { getTodosApi, deleteTodoApi, createTodoApi, updateTodoApi } from '../../api'
-import { Dispatch } from "redux";
+import { Action, Dispatch } from "redux";
 import { RootState } from '../index';
 import { isTemplateMiddle } from 'typescript';
 
@@ -18,7 +18,7 @@ export const fetchTodos = () => (dispatch: Dispatch): void => {
 
 export const ACTION_DELETE = 'ACTION_DELETE';
 export const deleteTodo = (id: number | string) => (dispatch: Dispatch): void => {
-     deleteTodoApi(id)
+    deleteTodoApi(id)
         .then(() => dispatch({
             type: ACTION_DELETE,
             payload: id,
@@ -26,11 +26,14 @@ export const deleteTodo = (id: number | string) => (dispatch: Dispatch): void =>
 };
 
 export const ACTION_SET_ITEM = 'ACTION_SET_ITEM';
-export const toggleTodo = (id: number | string) => (dispatch: Dispatch, state: () => RootState): Promise<any | IToDos> => {
+export const toggleTodo = (
+    id: number | string
+) => (dispatch: Dispatch, state: () => RootState): Promise<Action> => {
+
     const { todos } = state();
     const { items } = todos
     const item = items.find((item: IToDos) => item.id === id);
-    const newItem = { ...item,completed: !item.completed};
+    const newItem = { ...item, completed: !item.completed };
 
     return updateTodoApi(id, newItem)
         .then(() =>
@@ -41,11 +44,14 @@ export const toggleTodo = (id: number | string) => (dispatch: Dispatch, state: (
         );
 };
 
-export const updateTodo = (id: number | string, title: string) => (dispatch: Dispatch, state: () => RootState): Promise<any | IToDos> => {
+export const updateTodo = (
+    id: number | string, title: string
+) => (dispatch: Dispatch, state: () => RootState): Promise<Action> => {
+
     const { todos } = state();
     const { items } = todos
     const item = items.find((item: IToDos) => item.id === id);
-    const newItem = { ...item, title: title};
+    const newItem = { ...item, title: title };
 
     return updateTodoApi(id, newItem)
         .then((data) =>
@@ -56,11 +62,14 @@ export const updateTodo = (id: number | string, title: string) => (dispatch: Dis
         );
 };
 
-export const toggleTodoFavorite = (id: number | string) => (dispatch: Dispatch, state: () => RootState): Promise<any | IToDos> => {
+export const toggleTodoFavorite = (
+    id: number | string
+) => (dispatch: Dispatch, state: () => RootState): Promise<Action> => {
+    
     const { todos } = state();
     const { items } = todos
     const item = items.find((item: IToDos) => item.id === id);
-    const newItem = { ...item,favorite: !item.favorite };
+    const newItem = { ...item, favorite: !item.favorite };
 
     return updateTodoApi(id, newItem)
         .then((data) =>
@@ -72,7 +81,9 @@ export const toggleTodoFavorite = (id: number | string) => (dispatch: Dispatch, 
 };
 
 export const ACTION_CREATE_ITEM = 'ACTION_CREATE_ITEM';
-export const createTodo = (title: string) => (dispatch: Dispatch): Promise<any | IToDos> => {
+export const createTodo = (
+    title: string
+) => (dispatch: Dispatch): Promise<Action> => {
 
     return createTodoApi(title)
         .then((data) =>
