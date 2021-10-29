@@ -2,7 +2,7 @@
   "todos": [
     {
       "title": "Do something",
-      "completed": true,
+      "completed": false,
       "favorite": false,
       "id": 10
     },

@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import todosReducer from './reducers/todos';
 import todosFilterReducer from './reducers/todosFilter';
-import logger from "redux-logger";
+// import logger from "redux-logger"; 
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
 const store = createStore(
     rootReducer,
     compose(
-        applyMiddleware(thunk, logger),
+        applyMiddleware(thunk),
     )
 )
 
