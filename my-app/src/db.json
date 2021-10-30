@@ -2,25 +2,13 @@
   "todos": [
     {
       "title": "Do something",
-      "completed": true,
+      "completed": false,
       "favorite": false,
-      "id": 10
-    },
-    {
-      "title": "Do something",
-      "completed": false,
-      "favorite": true,
-      "id": 11
-    },
-    {
-      "title": "Do something",
-      "completed": false,
-      "favorite": true,
       "id": 12
     },
     {
       "title": "Do something",
-      "completed": false,
+      "completed": true,
       "favorite": false,
       "id": 13
     },
@@ -31,10 +19,16 @@
       "id": 14
     },
     {
-      "title": "fsdf",
+      "title": "Do something else",
+      "completed": true,
+      "favorite": false,
+      "id": 16
+    },
+    {
+      "title": "Do something",
       "completed": false,
       "favorite": false,
-      "id": 15
+      "id": 17
     }
   ]
 }

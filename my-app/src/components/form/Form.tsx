@@ -1,11 +1,12 @@
 import { FC, useState, } from 'react';
 import { connect } from 'react-redux';
+import { Action } from 'redux';
 import { IToDos } from '../../api';
 import { createTodo } from '../../store/actions/todos';
 import "./Form.scss";
 
 type ITodoForm = {
-    createTodo: (title:string) => Promise <IToDos>
+    createTodo: (title:string) => Promise <Action>
 }
 
 const Form: FC<ITodoForm> = ({ createTodo }) => {
