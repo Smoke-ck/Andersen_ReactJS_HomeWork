@@ -1,6 +1,5 @@
 import { FC, useState, } from 'react';
 import { connect } from 'react-redux';
-import { Action } from 'redux';
 import { IToDos } from '../../api';
 import { createTodo } from '../../store/actions/todos';
 import "./Form.scss";
