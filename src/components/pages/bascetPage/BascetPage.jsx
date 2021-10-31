@@ -27,7 +27,7 @@ const BascetPage = ({ selectedItems, deleteItem, cardAction, remove, }) => {
               <button onClick={() => deleteBascet(el.id, el.count)}
                 className="bascet__card--control-clear">Del</button>
             </div>
-            <p className>цена {el.price * el.count}</p>
+            <p>цена {el.price * el.count}</p>
           </div>
         ))}
       </div>
