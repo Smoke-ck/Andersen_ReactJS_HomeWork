@@ -1,8 +1,10 @@
 import { FC } from 'react'
 import "./modal.scss"
 import ReactDom from 'react-dom'
+import React, { useEffect, useState } from 'react'
 
-const portal = document.getElementById('portal')!;
+const root = document.getElementById('root')!;
+
 type IModal = {
   active: boolean
   setActive: any,
@@ -10,6 +12,16 @@ type IModal = {
   handleToggleModal: () => void
 }
 const Modal: FC<IModal> = ({ active, setActive, children, handleToggleModal }) => {
+
+  const [container] = useState(document.createElement('div'))
+
+  useEffect(() => {
+    root.appendChild(container)
+
+    return () => {
+      root.removeChild(container)
+    }
+  }, [container, root])
 
   return ReactDom.createPortal(
     <div className={active ? 'modal active' : 'modal'} onClick={() => { setActive(false) }}>
@@ -22,7 +34,7 @@ const Modal: FC<IModal> = ({ active, setActive, children, handleToggleModal }) =
         {children}
       </div>
     </div>,
-    portal
+    container
   )
 }
 export default Modal;
