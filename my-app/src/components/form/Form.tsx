@@ -6,7 +6,7 @@ import { createTodo } from '../../store/actions/todos';
 import "./Form.scss";
 
 type ITodoForm = {
-    createTodo: (title:string) => Promise <Action>
+    createTodo: (title:string) => Promise <IToDos>
 }
 
 const Form: FC<ITodoForm> = ({ createTodo }) => {
@@ -33,11 +33,9 @@ const Form: FC<ITodoForm> = ({ createTodo }) => {
                     value={title}
                     onChange={onValueChange}
                 />
-
                 <div className="two columns"> {title.length > 160
                     ? <span className="errorMsg">Превышен лимит текста задачи на {title.length - 160} символов</span>
                     : <input type="submit" className="form__button" value="Добавить" />}
-
                 </div>
             </div>
         </form>

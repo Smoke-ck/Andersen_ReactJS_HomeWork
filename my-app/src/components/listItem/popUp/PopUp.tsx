@@ -5,11 +5,11 @@ type IPopup = {
     handleFavoriteToDo: (e:React.MouseEvent) => void,
     handleDoneToDo: (e:React.MouseEvent) => void,
     handleClick: () => void,
-    handleOpenChange: () => void, 
+    handleToggleModal: () => void, 
     item: IToDos,
 }
 
-const PopUp:FC<IPopup> = ({handleFavoriteToDo,handleDoneToDo,handleClick,handleOpenChange,item}) => {
+const PopUp:FC<IPopup> = ({handleFavoriteToDo,handleDoneToDo,handleClick,handleToggleModal,item}) => {
     return (
         <div>
             <button
@@ -24,11 +24,11 @@ const PopUp:FC<IPopup> = ({handleFavoriteToDo,handleDoneToDo,handleClick,handleO
             </button>
             <button
                 className="listItem__menu--button"
-                onClick={handleClick}>Редактировать
+                onClick={handleClick}> Редактировать
             </button>
             <button
                 className="listItem__menu--button"
-                onClick={handleOpenChange}>Удалить
+                onClick={handleToggleModal}> Удалить
             </button>
         </div>
     )

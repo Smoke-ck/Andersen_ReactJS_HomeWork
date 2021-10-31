@@ -4,31 +4,25 @@
       "title": "Do something",
       "completed": false,
       "favorite": true,
-      "id": 13
-    },
-    {
-      "title": "Do something else",
-      "completed": false,
-      "favorite": false,
-      "id": 14
+      "id": 16
     },
     {
       "title": "Do something",
       "completed": true,
       "favorite": true,
-      "id": 16
-    },
-    {
-      "title": "Do something",
-      "completed": false,
-      "favorite": false,
       "id": 17
     },
     {
       "title": "Do something else",
       "completed": false,
+      "favorite": true,
+      "id": 19
+    },
+    {
+      "title": "Do something else some times",
+      "completed": false,
       "favorite": false,
-      "id": 18
+      "id": 20
     }
   ]
 }

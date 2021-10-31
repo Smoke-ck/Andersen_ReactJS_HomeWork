@@ -1,18 +1,17 @@
-import React, { FC} from "react";
+import React, { FC } from "react";
 import { IToDos } from "../../api";
 import { useState } from "react";
 import Modal from "./../modal/Modal";
 import { FaStar } from 'react-icons/fa'
 import './ListItem.scss'
 import PopUp from "./popUp/PopUp";
-import { Action} from "redux";
 
 type IToDoListItem = {
     item: IToDos,
-    onItemToggle: (id: number | string) => Promise<Action>,
+    onItemToggle: (id: number | string) => Promise<IToDos>,
     onItemDelete: (id: number | string) => void,
-    onItemFavorite: (id: number | string) => Promise<Action>,
-    onUpdate: (id: number | string, title: string) => Promise<Action>
+    onItemFavorite: (id: number | string) => Promise<IToDos>,
+    onUpdate: (id: number | string, title: string) => Promise<IToDos>
 }
 
 const ListItem: FC<IToDoListItem> = ({ item, onItemToggle, onItemDelete, onItemFavorite, onUpdate }) => {
@@ -21,15 +20,15 @@ const ListItem: FC<IToDoListItem> = ({ item, onItemToggle, onItemDelete, onItemF
 
     const [title, setTitle] = useState(item.title);
 
-    const [modalActive, setModalActive] = useState(false);
+    const [isModalActive, setModalActive] = useState(false);
 
-    const [detailsActive, setDetailsActive] = useState(false);
+    const [isDetailsActive, setDetailsActive] = useState(false);
     const [erorr, setNewError] = useState('')
 
     const handleClick = () => {
         setIsEditing(true);
     }
-    
+
     const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
         if (e.key === "Enter" && title.length < 160) {
             setIsEditing(false);
@@ -42,18 +41,18 @@ const ListItem: FC<IToDoListItem> = ({ item, onItemToggle, onItemDelete, onItemF
             setNewError(`${e.target.value.length - 160}`)
         }
     }
-    const onDetailsActive = () => {
-        setDetailsActive(!detailsActive);
+    const handleDetailsActive = () => {
+        setDetailsActive(!isDetailsActive);
     }
 
     const handleFavoriteToDo = (e: React.MouseEvent) => {
-        onDetailsActive();
+        handleDetailsActive();
         e.stopPropagation();
         onItemFavorite(item.id);
     }
 
     const handleDoneToDo = (e: React.MouseEvent) => {
-        onDetailsActive();
+        handleDetailsActive();
         e.stopPropagation();
         onItemToggle(item.id);
     }
@@ -67,8 +66,8 @@ const ListItem: FC<IToDoListItem> = ({ item, onItemToggle, onItemDelete, onItemF
         setModalActive(false);
     }
 
-    const handleOpenChange = () => {
-        setModalActive(true);
+    const handleToggleModal = () => {
+        setModalActive(prevState => !prevState);
     }
 
     const handleDeleteToDo = (e: React.MouseEvent) => {
@@ -95,7 +94,7 @@ const ListItem: FC<IToDoListItem> = ({ item, onItemToggle, onItemDelete, onItemF
                 </div>
                 :
                 <div className="listItem__wrapper">
-                    <span onClick={onDetailsActive} className="listItem__menu--title">...</span>
+                    <span onClick={handleDetailsActive} className="listItem__menu--title">...</span>
                     <div
                         onClick={(e: React.MouseEvent) => handleCloseMenu(e)}
                         className={"listItem" + (item.completed ? 'done' : '')}>
@@ -104,28 +103,26 @@ const ListItem: FC<IToDoListItem> = ({ item, onItemToggle, onItemDelete, onItemF
                                 <h2 className="listItem__title">{item.title} </h2>
                             </div>
                             <div className="listItem__menu">
-                                {detailsActive
-                                    ? 
-                                    <PopUp 
-                                    handleFavoriteToDo={handleFavoriteToDo}
-                                    handleDoneToDo={handleDoneToDo}
-                                    handleClick={handleClick}
-                                    handleOpenChange={handleOpenChange}
-                                    item={item}/>
+                                {isDetailsActive
+                                    ?
+                                    <PopUp
+                                        handleFavoriteToDo={handleFavoriteToDo}
+                                        handleDoneToDo={handleDoneToDo}
+                                        handleClick={handleClick}
+                                        handleToggleModal={handleToggleModal}
+                                        item={item} />
                                     : ''}
                             </div>
                         </div>
                         <div
                             className={!item.favorite ? "listItem___button--favorite" : 'listItem__button--notFavorite'}
-                            onClick={(e: React.MouseEvent) => handleTogleStar(e)}> <FaStar />
+                            onClick={(e: React.MouseEvent) => handleTogleStar(e)}> <FaStar/>
                         </div>
-                        <Modal
-                            active={modalActive}
-                            setActive={setModalActive} >
+                        {isModalActive && (<Modal
+                            active={isModalActive}
+                            setActive={setModalActive}
+                            handleToggleModal={handleToggleModal}>
                             <div className="deleteMenu">
-                                <button className="deleteMenu__button deleteMenu__button--close"
-                                    onClick={handleCloseModal}>Х
-                                </button>
                                 <h3 className="deleteMenu__title">Вы действительно хотите удалить эту задачу?</h3>
                                 <div className="deleteMenu__title--todo">{title}</div>
                                 <div >
@@ -137,7 +134,7 @@ const ListItem: FC<IToDoListItem> = ({ item, onItemToggle, onItemDelete, onItemF
                                     </button>
                                 </div>
                             </div>
-                        </Modal>
+                        </Modal>)}
                     </div>
                 </div>
             }

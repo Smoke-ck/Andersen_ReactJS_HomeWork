@@ -19,13 +19,15 @@
     &__wrapper__title {
         position: relative;
     }
-    &__button--favorite{
-        color:black;
-        cursor: pointer;
-    }
-    &__button--notFavorite {
-        color:#ff5500;
-        cursor: pointer;
+    &__button {
+        &--favorite{
+            color:black;
+            cursor: pointer
+        }
+        &--notFavorite {
+            color:#ff5500;
+            cursor: pointer
+        }
     }
     &__menu {
         cursor: pointer;

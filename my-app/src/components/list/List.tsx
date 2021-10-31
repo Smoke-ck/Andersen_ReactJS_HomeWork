@@ -3,17 +3,16 @@ import ListItem from '../listItem/ListItem';
 import { connect } from 'react-redux';
 import { deleteTodo, toggleTodoFavorite, toggleTodo, updateTodo } from '../../store/actions/todos';
 import { IToDos } from '../../api';
-import { Action} from "redux";
 import { IAllToDos } from '../../store/reducers/todos';
 import { IFilterAllToDo } from '../../store/reducers/todosFilter';
 import './List.scss'
 
 type IToDoList = {
     todos: Array<IToDos>,
-    onItemToggle: (id: number | string) => Promise<Action>,
-    onItemFavorite: (id: number | string) => Promise<Action>,
+    onItemToggle: (id: number | string) => Promise<IToDos>,
+    onItemFavorite: (id: number | string) => Promise<IToDos>,
     onItemDelete: (id: number | string) => void,
-    onUpdate: (id: number | string, title: string) => Promise<Action>
+    onUpdate: (id: number | string, title: string) => Promise<IToDos>
 }
 
 const List: FC<IToDoList> = ({ todos, onItemToggle, onItemFavorite, onItemDelete, onUpdate }) => {
