@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form should match the snapshot 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [MockFunction],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(Form)
+    createTodo={[MockFunction]}
+    dispatch={[MockFunction]}
+  >
+    <Form
+      createTodo={[Function]}
+      dispatch={[MockFunction]}
+    >
+      <form
+        id="addTaskForm"
+        onSubmit={[Function]}
+      >
+        <div
+          className="form"
+        >
+          <input
+            className="form__input"
+            id="taskNameInput"
+            onChange={[Function]}
+            type="text"
+            value=""
+          />
+          <div
+            className="two columns"
+          >
+             
+            <input
+              className="form__button"
+              type="submit"
+              value="Добавить"
+            />
+          </div>
+          <p
+            className="form__test__text"
+          />
+        </div>
+      </form>
+    </Form>
+  </Connect(Form)>
+</Provider>
+`;

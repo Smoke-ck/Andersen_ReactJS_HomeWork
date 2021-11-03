@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal component should render all components  1`] = `
+<Portal
+  containerInfo={<div />}
+>
+  <div
+    className="modal"
+    onClick={[Function]}
+  >
+    <div
+      className="modal__content"
+      onClick={[Function]}
+    >
+      <div
+        className="modal__close"
+      >
+        <button
+          className="deleteMenu__button deleteMenu__button--close"
+          onClick={[MockFunction]}
+        >
+          Х
+        </button>
+      </div>
+      <Child />
+    </div>
+  </div>
+</Portal>
+`;

@@ -14,7 +14,7 @@ const initialState: IAllToDos = {
     items: [],
 };
 
-export default function (state = initialState, { type, payload }: { type: string, payload: any }) {
+export default function ToDosReducer (state = initialState, { type, payload }: { type: string, payload: any }) {
     switch (type) {
         case ACTION_DELETE:
             return {

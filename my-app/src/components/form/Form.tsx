@@ -36,6 +36,7 @@ const Form: FC<ITodoForm> = ({ createTodo }) => {
                     ? <span className="errorMsg">Превышен лимит текста задачи на {title.length - 160} символов</span>
                     : <input type="submit" className="form__button" value="Добавить" />}
                 </div>
+                <p className='form__test__text'>{title}</p>
             </div>
         </form>
     );

@@ -8,7 +8,7 @@ type IToDoFilter = {
     filter: string
 }
 
-const Filters: FC<IToDoFilter> = ({ setTodosFilter, filter }) => {
+export const Filters: FC<IToDoFilter> = ({ setTodosFilter, filter }) => {
     return (
         <div className="filter">
             <button

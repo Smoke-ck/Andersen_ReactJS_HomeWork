@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Filters snapshot shoud render div 1`] = `
+<div
+  className="filter"
+>
+  <button
+    className="filter__button"
+    onClick={[Function]}
+  >
+    Выполненные задачи
+  </button>
+  <button
+    className="filter__button"
+    onClick={[Function]}
+  >
+    Задачи в работе
+  </button>
+  <button
+    className="filter__button"
+    onClick={[Function]}
+  >
+    Избранные задачи
+  </button>
+  <button
+    className="filter__button"
+    onClick={[Function]}
+  >
+    Все задачи
+  </button>
+</div>
+`;

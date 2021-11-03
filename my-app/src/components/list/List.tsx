@@ -7,7 +7,7 @@ import { IAllToDos } from '../../store/reducers/todos';
 import { IFilterAllToDo } from '../../store/reducers/todosFilter';
 import './List.scss'
 
-type IToDoList = {
+export type IToDoList = {
     todos: Array<IToDos>,
     onItemToggle: (id: number | string) => Promise<IToDos>,
     onItemFavorite: (id: number | string) => Promise<IToDos>,
@@ -15,10 +15,10 @@ type IToDoList = {
     onUpdate: (id: number | string, title: string) => Promise<IToDos>
 }
 
-const List: FC<IToDoList> = ({ todos, onItemToggle, onItemFavorite, onItemDelete, onUpdate }) => {
+export const List: FC<IToDoList> = ({ todos, onItemToggle, onItemFavorite, onItemDelete, onUpdate }) => {
 
     return (
-        <div className="list">
+        <div className="list" >
             {todos.map((item) => (
                 <ListItem
                     key={item.id}
@@ -32,7 +32,7 @@ const List: FC<IToDoList> = ({ todos, onItemToggle, onItemFavorite, onItemDelete
         </div>
     );
 }
-function mapStateToProps({ todos, todosFilter }: { todos: IAllToDos, todosFilter: IFilterAllToDo }) {
+ export function mapStateToProps({ todos, todosFilter }: { todos: IAllToDos, todosFilter: IFilterAllToDo }) {
     let items = todos.items;
 
     if (todosFilter.value !== 'all') {
@@ -49,7 +49,7 @@ function mapStateToProps({ todos, todosFilter }: { todos: IAllToDos, todosFilter
     };
 }
 
-const mapDispatchToProps = {
+ const mapDispatchToProps = {
     onItemDelete: deleteTodo,
     onItemFavorite: toggleTodoFavorite,
     onItemToggle: toggleTodo,

@@ -1,21 +1,9 @@
 {
   "todos": [
     {
-      "title": "Do something",
-      "completed": false,
-      "favorite": true,
-      "id": 16
-    },
-    {
-      "title": "Do something",
-      "completed": true,
-      "favorite": true,
-      "id": 17
-    },
-    {
       "title": "Do something else",
       "completed": false,
-      "favorite": true,
+      "favorite": false,
       "id": 19
     },
     {
@@ -23,6 +11,18 @@
       "completed": false,
       "favorite": false,
       "id": 20
+    },
+    {
+      "title": "Do something else",
+      "completed": false,
+      "favorite": false,
+      "id": 22
+    },
+    {
+      "title": "Do something",
+      "completed": false,
+      "favorite": false,
+      "id": 23
     }
   ]
 }

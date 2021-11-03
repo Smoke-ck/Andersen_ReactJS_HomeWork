@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedList container render wrapped into provider with mocked store 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "onStateChange": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
+      },
+    }
+  }
+>
+  <Connect(List)
+    0={
+      Object {
+        "completed": false,
+        "favorite": false,
+        "id": 50,
+        "title": "hi",
+      }
+    }
+    1={
+      Object {
+        "completed": true,
+        "favorite": true,
+        "id": 51,
+        "title": "hi",
+      }
+    }
+    2={
+      Object {
+        "completed": false,
+        "favorite": false,
+        "id": 52,
+        "title": "hi",
+      }
+    }
+    3={
+      Object {
+        "completed": true,
+        "favorite": false,
+        "id": 53,
+        "title": "hi",
+      }
+    }
+  />
+</ContextProvider>
+`;

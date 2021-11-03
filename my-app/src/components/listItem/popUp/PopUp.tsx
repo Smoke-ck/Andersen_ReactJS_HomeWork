@@ -11,7 +11,7 @@ type IPopup = {
 
 const PopUp:FC<IPopup> = ({handleFavoriteToDo,handleDoneToDo,handleClick,handleToggleModal,item}) => {
     return (
-        <div>
+        <div className="popup">
             <button
                 className="listItem__menu--button"
                 onClick={(e: React.MouseEvent) => handleFavoriteToDo(e)}>

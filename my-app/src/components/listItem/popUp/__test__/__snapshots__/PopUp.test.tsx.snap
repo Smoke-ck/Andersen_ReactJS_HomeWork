@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selected component component should render correctly 1`] = `
+<PopUp
+  handleClick={[MockFunction]}
+  handleDoneToDo={[MockFunction]}
+  handleFavoriteToDo={[MockFunction]}
+  handleToggleModal={[MockFunction]}
+  item={
+    Object {
+      "completed": false,
+      "favorite": false,
+      "id": 50,
+      "title": "hi",
+    }
+  }
+>
+  <div
+    className="popup"
+  >
+    <button
+      className="listItem__menu--button"
+      onClick={[Function]}
+    >
+      В избранно
+    </button>
+    <button
+      className="listItem__menu--button"
+      onClick={[Function]}
+    >
+      Выполнено
+    </button>
+    <button
+      className="listItem__menu--button"
+      onClick={[MockFunction]}
+    >
+       Редактировать
+    </button>
+    <button
+      className="listItem__menu--button"
+      onClick={[MockFunction]}
+    >
+       Удалить
+    </button>
+  </div>
+</PopUp>
+`;
